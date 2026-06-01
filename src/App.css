@@ -1,0 +1,17 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.offwhite{background: #ffeaaf;}
+.sky { background: skyblue; }
+.red { background: #ff4d4d; }
+.gold { background: #ffd700; }
+.dark { background: #2f3640; }
+.purple-black {background: linear-gradient(purple, black);}

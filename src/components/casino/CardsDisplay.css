@@ -1,0 +1,66 @@
+/* ==========================================
+   1. 牌組區塊
+   ========================================== */
+.cards {
+  width: 90%;
+  min-height: 120px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.15);
+
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+/* ==========================================
+   2. 點數計分板 (Score Board)
+   ========================================== */
+.point {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ffcc00;
+
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 70px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-right: 10px;
+}
+
+.point h3 {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+
+.point p {
+  margin: 2px 0 0 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffcc00;
+  /* 金色數字 */
+}
+
+/* ==========================================
+   3. 撲克牌圖片樣式 (Poker Cards)
+   ========================================== */
+.blackjack img {
+  height: 100px;
+
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.blackjack img:hover {
+  transform: translateY(-5px);
+}

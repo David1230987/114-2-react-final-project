@@ -1,0 +1,100 @@
+/* ==========================================
+   1. 大廳舞台底座 (Lobby Stage Base)
+   ========================================== */
+.lobby {
+    width: 100%;
+    height: 100%;
+    min-height: 60vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background: radial-gradient(#1e2029, #111217);
+    border-radius: 12px;
+}
+
+/* ==========================================
+   2. 豪華接待卡片面版 (Luxury Reception Card)
+   ========================================== */
+.lobby-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 40px 50px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+}
+
+/* ==========================================
+   3. 標題與副標題 (Typography)
+   ========================================== */
+.lobby-title {
+    font-size: 38px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+    color: #e2e8f0;
+
+    text-shadow: 0 0 15px rgba(226, 232, 240, 0.3);
+}
+
+.lobby-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   4. 賭場大門入場按鈕 (The Grand Entrance Button)
+   ========================================== */
+a.enter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    width: 100%;
+    padding: 16px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    color: #10b981; 
+    background-color: #041a0e; 
+    border: 2px solid #10b981;
+    border-radius: 50px;
+    
+    /* 綠色霓虹燈發光特效 */
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+}
+
+/* 價格高亮 */
+.ticket-price {
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 900;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+a.enter-button:hover {
+    color: #041a0e;
+    background-color: #10b981;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 0 10px rgba(16, 185, 129, 0.3);
+    transform: translateY(-3px);
+}
+
+/* 按鈕點擊按下的回饋 */
+a.enter-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}

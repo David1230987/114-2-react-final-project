@@ -1,0 +1,95 @@
+/* nav.site-nav {
+    background: gray;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+a.site-nav {
+    text-decoration: none;
+    background-color: white;
+    padding: 3px 5px;
+    border-radius: 20px;
+    width: 70px;
+    text-align: center;
+} */
+
+/* ==========================================
+   1. 膠囊型導航列底座 (Capsule Nav Base)
+   ========================================== */
+nav.site-nav {
+    /* 升級成極有質感的半透明太空灰黑色 */
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 12px;
+    padding: 6px 12px;
+    
+    display: flex;
+    flex-direction: row;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+
+    width: auto;
+}
+
+/* ==========================================
+   2. 通用項目按鈕風格 (Nav Items)
+   ========================================== */
+/* 同時鎖定可點擊的 <a> 標籤與鎖定的 <div> 標籤 */
+.nav-item {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 20px;
+    border-radius: 20px;
+    width: 80px;
+    text-align: center;
+}
+
+/* ==========================================
+   3. 可點擊狀態樣式 (Active & Hover Link)
+   ========================================== */
+a.nav-item {
+    text-decoration: none;
+    color: #94a3b8;
+    /* 平時是科技灰文字 */
+    background-color: transparent;
+    /* 平時背景透明，看起來更輕盈 */
+}
+
+/* 滑鼠懸停時 (Hover) */
+a.nav-item:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.08);
+    /* 微微亮起的灰色底 */
+}
+
+/* 🌟 當前頁面啟用狀態：React Router 自動附加的 .active 魔法 */
+a.nav-item.active {
+    color: #1e293b;
+    /* 文字變成深色 */
+    background-color: #ffcc00;
+    /* 背景變成亮眼的金黃色膠囊 */
+    box-shadow: 0 2px 8px rgba(255, 204, 0, 0.4);
+    /* 金光外擴陰影 */
+}
+
+/* ==========================================
+   4. 賭博中鎖定狀態樣式 (Locked State)
+   ========================================== */
+.nav-item.locked {
+    background-color: rgba(0, 0, 0, 0.25);
+    /* 更暗沉的底色 */
+    border: 1px dashed rgba(239, 68, 68, 0.2);
+    /* 淡淡的警告紅色虛線邊框 */
+    cursor: not-allowed;
+    /* 🌟 關鍵：游標移上去會自動變成「禁止點擊」的紅圈符號 */
+}
+
+.nav-item.locked p {
+    color: #64748b;
+    /* 暗淡無光的灰色字體 */
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}

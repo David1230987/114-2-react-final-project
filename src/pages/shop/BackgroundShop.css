@@ -1,0 +1,7 @@
+.shop-contents {
+    padding: 10px;
+    gap: 5px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,93 @@
+/* 基本與 ShopLayout.css 一致 */
+
+/* ==========================================
+   1. 最外層大包裹盒 (Page Wrapper)
+   ========================================== */
+.casino {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.casino-title {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 10px 0 0 0;
+    letter-spacing: 6px;
+    background: transparent;
+    color: black;
+}
+
+.purple-black, .dark {color: white;}
+
+/* ==========================================
+   2. 核心大銀盒 (Main Dashboard Box)
+   ========================================== */
+.main-box {
+    background: radial-gradient(circle at top, #2d313f 0%, #1c1e24 100%);
+    height: auto;
+    min-height: 80vh;
+    width: 85vw;
+    max-width: 1200px;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ==========================================
+   3. 上方頂部數據區列 (Player Data Bar)
+   ========================================== */
+.data {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 20px;
+    border-radius: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+
+/* ==========================================
+   4. 遊戲切換導覽列標籤頁 (Game Tabs Navigation)
+   ========================================== */
+.casino-nav {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+}
+
+a.casino-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+a.casino-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+a.casino-link.active {
+    color: #ffcc00;
+    background: rgba(255, 204, 0, 0.1);
+    border-bottom: 3px solid #ffcc00;
+}
+
