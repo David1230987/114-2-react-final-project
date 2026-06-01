@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useData } from "../../Context";
 import CardsDisplay from "../../components/casino/CardsDisplay";
 import "./BlackJack.css";
@@ -8,20 +8,33 @@ export default function BlackJack() {
   const [botCards, setBotCards] = useState([]);
   const [playerTotal, setPlayerTotal] = useState(0);
   const [botTotal, setBotTotal] = useState(0);
-  const [isBet, setIsBet] = useState(false);
+  const isBet = useRef(false);
   const [isBotActing, setIsBotActing] = useState(false);
   const [betMoney, setBetMoney] = useState(0);
   const [lose, setLose] = useState(false);
   const [win, setWin] = useState(false);
   const [draw, setDraw] = useState(false);
   const { currentMoney, setCurrentMoney } = useData();
+  const moneyRef = useRef(currentMoney);
+  const betMoneyRef = useRef(0);
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  if (betMoney > currentMoney) setBetMoney(currentMoney);
-  if (betMoney < 10 && currentMoney >= 10) setBetMoney(10);
-  if (currentMoney <= 0 && !isBet) setCurrentMoney(-1);
-  if (isBet && playerTotal > 21) {
+  if (!isBet.current && betMoney > currentMoney) {
+    setBetMoney(currentMoney);
+    betMoneyRef.current = currentMoney;
+  }
+  if (!isBet.current && betMoney < 10 && currentMoney >= 10) {
+    setBetMoney(10);
+    betMoneyRef.current = 10;
+  }
+  if (isBet.current && playerTotal > 21) {
     setLose(true);
-    setIsBet(false);
+    isBet.current=false;
+  }
+
+  if (moneyRef.current <= 0 && !isBet.current) {
+    setCurrentMoney(-1);
+    moneyRef.current = 9999;
   }
 
   function AddPlayerCard() {
@@ -77,7 +90,6 @@ export default function BlackJack() {
   }
 
   async function BotAct() {
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     let tempBotCards = botCards;
     let currentBotTotal = botTotal;
 
@@ -94,18 +106,20 @@ export default function BlackJack() {
 
   function settle(cBotTotal) {
     if (cBotTotal > 21) {
+      console.log(betMoneyRef.current);
       setWin(true);
-      setCurrentMoney((money) => money + 2 * betMoney);
+      setCurrentMoney((money) => {const latestMoney = money + 2 * betMoneyRef.current; moneyRef.current = latestMoney; return latestMoney;});
     } else if (playerTotal == cBotTotal) {
       setDraw(true);
-      setCurrentMoney((money) => money + betMoney);
+      setCurrentMoney((money) => {const latestMoney = money + betMoneyRef.current; moneyRef.current = latestMoney; return latestMoney;});
     } else if (playerTotal < cBotTotal) {
       setLose(true);
     } else if (playerTotal > cBotTotal) {
+      console.log(betMoneyRef.current);
       setWin(true);
-      setCurrentMoney((money) => money + 2 * betMoney);
+      setCurrentMoney((money) => {const latestMoney = money + 2 * betMoneyRef.current; moneyRef.current = latestMoney; return latestMoney;});
     }
-    setIsBet(false);
+    isBet.current=false;
   }
 
   return (
@@ -122,7 +136,7 @@ export default function BlackJack() {
 
       <div className="player-controller">
         {!isBotActing &&
-          (isBet ? (
+          (isBet.current ? (
             <div className="set-bet">
               <button className="add-btn" onClick={AddPlayerCard}>
                 ADD
@@ -133,27 +147,64 @@ export default function BlackJack() {
             </div>
           ) : (
             <div className="set-bet">
-              <button onClick={() => setBetMoney((money) => money - 100)}>
+              <button
+                onClick={() =>
+                  setBetMoney((money) => {
+                    const latestMoney = money - 100;
+                    betMoneyRef.current = latestMoney;
+                    return latestMoney;
+                  })
+                }
+              >
                 -100
               </button>
-              <button onClick={() => setBetMoney((money) => money - 10)}>
+              <button
+                onClick={() =>
+                  setBetMoney((money) => {
+                    const latestMoney = money - 10;
+                    betMoneyRef.current = latestMoney;
+                    return latestMoney;
+                  })
+                }
+              >
                 -10
               </button>
               <p>{betMoney}</p>
-              <button onClick={() => setBetMoney((money) => money + 10)}>
+              <button
+                onClick={() =>
+                  setBetMoney((money) => {
+                    const latestMoney = money + 10;
+                    betMoneyRef.current = latestMoney;
+                    return latestMoney;
+                  })
+                }
+              >
                 +10
               </button>
-              <button onClick={() => setBetMoney((money) => money + 100)}>
+              <button
+                onClick={() =>
+                  setBetMoney((money) => {
+                    const latestMoney = money + 100;
+                    betMoneyRef.current = latestMoney;
+                    return latestMoney;
+                  })
+                }
+              >
                 +100
               </button>
             </div>
           ))}
-        {!isBet && (
+        {!isBet.current && (
           <button
             className="bet-btn"
             onClick={() => {
-              setIsBet(true);
-              setCurrentMoney((money) => money - betMoney);
+              console.log("Ref:", betMoneyRef.current);
+              isBet.current=true;
+              setCurrentMoney((money) => {
+                const latestMoney = money - betMoneyRef.current;
+                moneyRef.current = latestMoney;
+                return latestMoney;
+              });
               Start();
             }}
           >
@@ -161,6 +212,7 @@ export default function BlackJack() {
           </button>
         )}
       </div>
+      <button onClick={() => {console.log("moneyRef:", moneyRef.current)}}>moneyRef</button>
 
       {win && <div className="result win-text">WIN</div>}
       {draw && <div className="result draw-text">DRAW</div>}
