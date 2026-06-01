@@ -29,7 +29,7 @@ export default function BlackJack() {
   }
   if (isBet.current && playerTotal > 21) {
     setLose(true);
-    isBet.current=false;
+    isBet.current = false;
   }
 
   if (moneyRef.current <= 0 && !isBet.current) {
@@ -108,18 +108,30 @@ export default function BlackJack() {
     if (cBotTotal > 21) {
       console.log(betMoneyRef.current);
       setWin(true);
-      setCurrentMoney((money) => {const latestMoney = money + 2 * betMoneyRef.current; moneyRef.current = latestMoney; return latestMoney;});
+      setCurrentMoney((money) => {
+        const latestMoney = money + 2 * betMoneyRef.current;
+        moneyRef.current = latestMoney;
+        return latestMoney;
+      });
     } else if (playerTotal == cBotTotal) {
       setDraw(true);
-      setCurrentMoney((money) => {const latestMoney = money + betMoneyRef.current; moneyRef.current = latestMoney; return latestMoney;});
+      setCurrentMoney((money) => {
+        const latestMoney = money + betMoneyRef.current;
+        moneyRef.current = latestMoney;
+        return latestMoney;
+      });
     } else if (playerTotal < cBotTotal) {
       setLose(true);
     } else if (playerTotal > cBotTotal) {
       console.log(betMoneyRef.current);
       setWin(true);
-      setCurrentMoney((money) => {const latestMoney = money + 2 * betMoneyRef.current; moneyRef.current = latestMoney; return latestMoney;});
+      setCurrentMoney((money) => {
+        const latestMoney = money + 2 * betMoneyRef.current;
+        moneyRef.current = latestMoney;
+        return latestMoney;
+      });
     }
-    isBet.current=false;
+    isBet.current = false;
   }
 
   return (
@@ -144,6 +156,34 @@ export default function BlackJack() {
               <button className="stop-btn" onClick={BotAct}>
                 STOP
               </button>
+              {/* <button
+                className="stop-btn"
+                onClick={() => {
+                  const point = 1;
+
+                  setPlayerCards((cards) => {
+                    const nextCards = [...cards, point];
+                    setPlayerTotal(ComputePoint(nextCards));
+                    return nextCards;
+                  });
+                }}
+              >
+                player Add 1
+              </button>
+              <button
+                className="stop-btn"
+                onClick={() => {
+                  const point = 1;
+
+                  setBotCards((cards) => {
+                    const nextCards = [...cards, point];
+                    setBotTotal(ComputePoint(nextCards));
+                    return nextCards;
+                  });
+                }}
+              >
+                bot Add 1
+              </button> */}
             </div>
           ) : (
             <div className="set-bet">
@@ -199,7 +239,7 @@ export default function BlackJack() {
             className="bet-btn"
             onClick={() => {
               console.log("Ref:", betMoneyRef.current);
-              isBet.current=true;
+              isBet.current = true;
               setCurrentMoney((money) => {
                 const latestMoney = money - betMoneyRef.current;
                 moneyRef.current = latestMoney;
@@ -212,7 +252,13 @@ export default function BlackJack() {
           </button>
         )}
       </div>
-      <button onClick={() => {console.log("moneyRef:", moneyRef.current)}}>moneyRef</button>
+      {/* <button
+        onClick={() => {
+          console.log("moneyRef:", moneyRef.current);
+        }}
+      >
+        moneyRef
+      </button> */}
 
       {win && <div className="result win-text">WIN</div>}
       {draw && <div className="result draw-text">DRAW</div>}
